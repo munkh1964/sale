@@ -6,6 +6,14 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
+    name: "Landing",
+    meta: {
+      layout: "landing",
+    },
+    component: () => import("../views/Landing.vue"),
+  },
+  {
+    path: "/home",
     name: "Home",
     meta: {
       layout: "main",
@@ -16,17 +24,33 @@ const routes = [
     path: "/login",
     name: "login",
     meta: {
-      layout: "empty",
+      layout: "landing",
     },
     component: () => import("../views/Login.vue"),
   },
   {
-    path: "/categories",
-    name: "categories",
+    path: "/products",
+    name: "products",
     meta: {
       layout: "main",
     },
-    component: () => import("../views/Categories.vue"),
+    component: () => import("../views/Products.vue"),
+  },
+  {
+    path: "/transactions",
+    name: "transactions",
+    meta: {
+      layout: "main",
+    },
+    component: () => import("../views/Transactions.vue"),
+  },
+  {
+    path: "/contacts",
+    name: "contacts",
+    meta: {
+      layout: "main",
+    },
+    component: () => import("../views/Contacts.vue"),
   },
 ];
 

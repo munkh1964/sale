@@ -1,77 +1,95 @@
 <template>
-  <nav class="navbar orange lighten-1">
-    <div class="nav-wrapper">
-      <div class="navbar-left">
-        <a href="#" @click.prevent="$emit('click')">
-          <i class="material-icons black-text">dehaze</i>
-        </a>
-        <span class="black-text">{{ date | date("datetime") }}</span>
-      </div>
-
-      <ul class="right hide-on-small-and-down">
-        <li>
-          <a
-            class="dropdown-trigger black-text"
-            href="#"
-            data-target="dropdown"
-            ref="dropdown"
-          >
-            USER NAME
-            <i class="material-icons right">arrow_drop_down</i>
+  <div>
+    <nav :class="navclass">
+      <div class="nav-wrapper">
+        <div class="container">
+          <a href="#" class="brand-logo">
+            <router-link to="/">
+              <img
+                src="require('@/assets/img/company_logo.svg')"
+                height="30"
+                width="60"
+                alt=""
+              />
+            </router-link>
           </a>
-
-          <ul id="dropdown" class="dropdown-content">
-            <li>
-              <router-link to="/profile" class="black-text">
-                <i class="material-icons">account_circle</i>Профиль
-              </router-link>
-            </li>
-            <li class="divider" tabindex="-1"></li>
-            <li>
-              <a href="#" class="black-text" @click.prevent="logout">
-                <i class="material-icons">assignment_return</i>Выйти
-              </a>
-            </li>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+            ><i class="material-icons">menu</i></a
+          >
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <router-link
+              v-for="link in links"
+              :key="link.url"
+              tag="li"
+              active-class="active"
+              :to="link.url"
+              :exact="link.exact"
+              ><a href="#" class="waves-effect pointer">{{
+                link.title
+              }}</a></router-link
+            >
           </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>
+        </div>
+      </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+      <router-link
+        v-for="link in links"
+        :key="link.url"
+        tag="li"
+        active-class="active"
+        :to="link.url"
+        :exact="link.exact"
+        ><a href="#" class="waves-effect waves-orange pointer sidenav-close">{{
+          link.title
+        }}</a></router-link
+      >
+    </ul>
+  </div>
 </template>
 
 <script>
 // Get rid of those pesky eslint errors for Materialize-css
-import M from "materialize-css";
+// import M from "materialize-css";
 
 export default {
   data: () => ({
-    date: new Date(),
-    interval: null,
-    dropdown: null,
+    links: [
+      { title: "Нүүр", url: "/home" },
+      { title: "Бүтээгдхүүн", url: "/products" },
+      { title: "Гүйлгээ", url: "/transactions" },
+      { title: "Холбоо", url: "/contacts" },
+    ],
+    navclass: [],
+    sidenav: null,
+    isLogged: false,
   }),
   methods: {
     logout() {
       console.log("logout");
     },
-    // async logout() {
-    //   await this.$store.dispatch("logout");
-    //   this.$router.push("/login");
-    // },
   },
   mounted() {
-    this.interval = setInterval(() => {
-      this.date = new Date();
-    }, 1000);
-    this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
-      constrainWidth: false,
-      coverTrigger: false,
-    });
+    this.navclass =
+      this.$route.meta.layout === "landing"
+        ? "transparentBG z-depth-0"
+        : "transparentBG";
+    var elems = document.querySelectorAll(".sidenav");
+    // eslint-disable-next-line no-undef
+    this.sidenav = M.Sidenav.init(elems, "open");
   },
   beforeDestroy() {
-    clearInterval(this.interval);
-    if (this.dropdown && this.dropdown.destroy) {
-      this.dropdown.destroy();
+    if (this.sidenav && this.sidenav.destroy) {
+      this.sidenav.estroy();
     }
   },
 };
 </script>
+
+<style scoped>
+nav ul li.active {
+  background-color: rgba(207, 107, 107, 0.2);
+  border-bottom: 2px solid #2edf0b;
+}
+</style>

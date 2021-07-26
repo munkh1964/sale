@@ -1,9 +1,10 @@
 <template>
   <div class="app-main-layout">
-    <Navbar @click="isOpen = !isOpen" />
-    <Sidebar v-model="isOpen" />
+    <div class="indigo darken-2">
+      <Navbar @click="isOpen = !isOpen" />
+    </div>
 
-    <main class="app-content" :class="{ full: !isOpen }">
+    <main class="full" :class="{ full: !isOpen }">
       <div class="app-page">
         <router-view></router-view>
       </div>
@@ -18,7 +19,6 @@
 
 <script>
 import Navbar from "@/components/app/Navbar";
-import Sidebar from "@/components/app/Sidebar";
 export default {
   name: "main-layout",
   data: () => ({
@@ -26,7 +26,13 @@ export default {
   }),
   components: {
     Navbar,
-    Sidebar,
   },
 };
 </script>
+
+<style scoped>
+.app-main-layout {
+  position: relative;
+  min-height: 100vh;
+}
+</style>
