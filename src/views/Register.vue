@@ -1,8 +1,23 @@
 <template>
-  <div class="login-form">
+  <div class="register-form">
     <form class="card auth-card" @submit.prevent="submitHandler">
       <div class="card-content">
-        <span class="card-title">Системд нэвтрэх</span>
+        <span class="card-title">Шинэ хэрэглэгч</span>
+        <div class="input-field">
+          <input
+            id="name"
+            type="text"
+            v-model.trim="name"
+            :class="{ invalid: $v.name.$dirty && !$v.name.required }"
+          />
+          <label for="name">Нэр</label>
+          <small
+            class="helper-text invalid"
+            v-if="$v.name.$dirty && !$v.name.required"
+          >
+            Нэрээ оруулна уу
+          </small>
+        </div>
         <div class="input-field">
           <input
             id="email"
@@ -18,12 +33,12 @@
           <small
             class="helper-text invalid"
             v-if="$v.email.$dirty && !$v.email.required"
-            >Эмайл хоосон байж болохгүй.</small
+            >Эмайлийн талбар хоосон байж болохгүй</small
           >
           <small
             class="helper-text invalid"
             v-else-if="$v.email.$dirty && !$v.email.email"
-            >Эмайл хаягаа зөв оруулна уу.</small
+            >Эмайл хаягаа зөв оруулна уу</small
           >
         </div>
         <div class="input-field">
@@ -42,14 +57,44 @@
             >Нууц үгээ оруулна уу</small
           >
         </div>
+        <div class="input-field">
+          <input
+            id="confirm"
+            type="password"
+            v-model.trim="confirm"
+            :class="{
+              invalid: $v.confirm.$dirty && !$v.confirm.sameAS,
+            }"
+          />
+          <label for="password">Нууц үгийн давталт</label>
+          <small
+            class="helper-text invalid"
+            v-if="$v.confirm.$dirty && !$v.confirm.sameAS"
+            >Нууц үгийн давталт тохирсонгүй</small
+          >
+        </div>
       </div>
+
+      <div class="radio">
+        <label v-for="type in usertypes" :key="type.value">
+          <input
+            name="type"
+            type="radio"
+            :value="type.value"
+            v-model="usertype"
+            class="with-gap"
+          />
+          <span class="reglabel">{{ type.text }}</span>
+        </label>
+      </div>
+
       <div class="card-action">
         <div>
           <button
             class="btn waves-effect waves-light auth-submit"
             type="submit"
           >
-            Нэвтрэх
+            Бүртгэх
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -59,22 +104,28 @@
 </template>
 
 <script>
-// import { required, email } from "@vuelidate/validators";
-import { email, required } from "vuelidate/lib/validators";
-// import messages from "@utils/messages";
+import { email, required, sameAs } from "vuelidate/lib/validators";
 
 export default {
-  name: "login",
+  name: "register",
   data: () => ({
     email: "",
     password: "",
+    confirm: "",
+    name: "",
+    usertypes: [
+      { text: "Борлуулагч", value: "saler" },
+      { text: "Нябо", value: "accounter" },
+      { text: "Админ", value: "admin" },
+    ],
+    usertype: "saler",
   }),
   validations: {
     email: { email, required },
     password: { required },
-  },
-  mounted() {
-    this.$error("Test");
+    confirm: { sameAs: sameAs("password") },
+    name: { required },
+    // agree: { checked: (v) => v },
   },
   methods: {
     async submitHandler() {
@@ -85,10 +136,12 @@ export default {
       const formData = {
         email: this.email,
         password: this.password,
+        name: this.name,
+        usertype: this.usertype,
       };
       try {
-        await this.$store.dispatch("login", formData);
-        this.$router.push("/home");
+        await this.$store.dispatch("register", formData);
+        this.$router.push("/");
         // eslint-disable-next-line no-empty
       } catch (e) {}
     },
@@ -97,7 +150,7 @@ export default {
 </script>
 
 <style scoped>
-.login-form {
+.register-form {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -118,5 +171,13 @@ export default {
 }
 .helper-text.invalid {
   color: #f44336;
+}
+
+.radio {
+  padding: 0px 24px 0px 24px;
+}
+
+.reglabel {
+  width: 130px;
 }
 </style>

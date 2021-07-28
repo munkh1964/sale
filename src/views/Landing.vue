@@ -10,7 +10,7 @@
           </h4>
         </div>
         <div class="card-action center-align">
-          <a class="btn" href="#">Visit to site</a>
+          <router-link class="btn" to="/home">Visit to site</router-link>
         </div>
       </div>
     </div>
