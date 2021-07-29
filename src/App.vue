@@ -9,7 +9,8 @@
 <script>
 import EmptyLayout from "@/layouts/EmptyLayout";
 import LandingLayout from "@/layouts/LandingLayout";
-import MainLayout from "@/layouts/MainLayout";
+import FrontLayout from "@/layouts/FrontLayout";
+import BackLayout from "@/layouts/BackLayout";
 
 export default {
   computed: {
@@ -20,8 +21,9 @@ export default {
   },
   components: {
     EmptyLayout,
-    MainLayout,
+    FrontLayout,
     LandingLayout,
+    BackLayout,
   },
 };
 </script>

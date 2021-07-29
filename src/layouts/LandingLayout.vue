@@ -1,6 +1,6 @@
 <template>
   <div class="landing-layout">
-    <Navbar />
+    <FrontNavbar />
     <main class="container">
       <router-view></router-view>
     </main>
@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import Navbar from "@/components/app/Navbar";
+import FrontNavbar from "@/components/app/frontend/FrontNavbar";
 export default {
   name: "landing-layout",
   data: () => ({
     isOpen: true,
   }),
   components: {
-    Navbar,
+    FrontNavbar,
   },
 };
 </script>

@@ -1,4 +1,7 @@
 {
+  "include": [
+    "**/*"
+  ],  
   "noImplicitAny": false,
   "allowJs": true,
 }

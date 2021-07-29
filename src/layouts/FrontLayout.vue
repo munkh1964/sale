@@ -1,7 +1,7 @@
 <template>
-  <div class="app-main-layout">
+  <div class="app-front-layout">
     <div class="indigo darken-2">
-      <Navbar />
+      <FrontNavbar />
     </div>
 
     <main class="full">
@@ -19,7 +19,7 @@
 
 <script>
 import messages from "@/utils/messages";
-import Navbar from "@/components/app/Navbar";
+import FrontNavbar from "@/components/app/frontend/FrontNavbar";
 export default {
   name: "main-layout",
   data: () => ({
@@ -36,13 +36,13 @@ export default {
     },
   },
   components: {
-    Navbar,
+    FrontNavbar,
   },
 };
 </script>
 
 <style scoped>
-.app-main-layout {
+.app-front-layout {
   position: relative;
   min-height: 100vh;
 }

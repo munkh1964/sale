@@ -2,7 +2,7 @@
   <div class="login-form">
     <form class="card auth-card" @submit.prevent="submitHandler">
       <div class="card-content">
-        <span class="card-title">Системд нэвтрэх</span>
+        <span class="card-title center">Системд нэвтрэх</span>
         <div class="input-field">
           <input
             id="email"
@@ -73,9 +73,6 @@ export default {
     email: { email, required },
     password: { required },
   },
-  mounted() {
-    this.$error("Test");
-  },
   methods: {
     async submitHandler() {
       if (this.$v.$invalid) {
@@ -88,7 +85,7 @@ export default {
       };
       try {
         await this.$store.dispatch("login", formData);
-        this.$router.push("/home");
+        this.$router.push("/dashboard");
         // eslint-disable-next-line no-empty
       } catch (e) {}
     },

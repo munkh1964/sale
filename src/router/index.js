@@ -10,55 +10,63 @@ const routes = [
     meta: {
       layout: "landing",
     },
-    component: () => import("../views/Landing.vue"),
+    component: () => import("../views/frontend/Landing.vue"),
   },
   {
     path: "/home",
     name: "Home",
     meta: {
-      layout: "main",
+      layout: "front",
     },
-    component: () => import("../views/Home.vue"),
-  },
-  {
-    path: "/login",
-    name: "login",
-    meta: {
-      layout: "main",
-    },
-    component: () => import("../views/Login.vue"),
-  },
-  {
-    path: "/register",
-    name: "register",
-    meta: {
-      layout: "main",
-    },
-    component: () => import("../views/Register.vue"),
+    component: () => import("../views/frontend/Home.vue"),
   },
   {
     path: "/products",
     name: "products",
     meta: {
-      layout: "main",
+      layout: "front",
     },
-    component: () => import("../views/Products.vue"),
-  },
-  {
-    path: "/transactions",
-    name: "transactions",
-    meta: {
-      layout: "main",
-    },
-    component: () => import("../views/Transactions.vue"),
+    component: () => import("../views/frontend/Products.vue"),
   },
   {
     path: "/contacts",
     name: "contacts",
     meta: {
-      layout: "main",
+      layout: "front",
     },
-    component: () => import("../views/Contacts.vue"),
+    component: () => import("../views/frontend/Contacts.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    meta: {
+      layout: "empty",
+    },
+    component: () => import("../views/backend/Login.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    meta: {
+      layout: "empty",
+    },
+    component: () => import("../views/backend/Register.vue"),
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    meta: {
+      layout: "back",
+    },
+    component: () => import("../views/backend/Dashboard.vue"),
+  },
+  {
+    path: "/transactions",
+    name: "transactions",
+    meta: {
+      layout: "back",
+    },
+    component: () => import("../views/backend/Transactions.vue"),
   },
 ];
 

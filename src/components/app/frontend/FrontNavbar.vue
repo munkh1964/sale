@@ -1,12 +1,5 @@
 <template>
   <div>
-    <ul id="dropdown1" class="dropdown-content">
-      <li><router-link to="/login">Нэвтрэх</router-link></li>
-      <li><router-link to="/profile">Мэдээлэл</router-link></li>
-      <li><router-link to="/register">Бүртгэх</router-link></li>
-      <li class="divider"></li>
-      <li><a href="#" @click.prevent="logout">Гарах</a></li>
-    </ul>
     <nav :class="navclass">
       <div class="nav-wrapper">
         <div class="container">
@@ -35,15 +28,6 @@
                 link.title
               }}</a></router-link
             >
-            <li v-if="layout != 'landing'">
-              <a
-                class="dropdown-trigger"
-                href="#!"
-                data-target="dropdown1"
-                ref="dropdown"
-                >Хэрэглэгч<i class="material-icons right">arrow_drop_down</i></a
-              >
-            </li>
           </ul>
         </div>
       </div>
@@ -74,7 +58,6 @@ export default {
     links: [
       { title: "Нүүр", url: "/home" },
       { title: "Бүтээгдхүүн", url: "/products" },
-      { title: "Гүйлгээ", url: "/transactions" },
       { title: "Холбоо", url: "/contacts" },
     ],
     navclass: [],
