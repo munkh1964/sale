@@ -1,6 +1,7 @@
 <template>
   <div>
     <p>Нүүр хуудас</p>
+    <Loader v-if="loading" />
   </div>
 </template>
 
@@ -11,7 +12,7 @@
 export default {
   name: "Home",
   data: () => ({
-    sidebar: null,
+    loading: true,
   }),
 };
 </script>
